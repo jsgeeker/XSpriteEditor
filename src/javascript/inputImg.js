@@ -4,6 +4,7 @@
         this.playground = document.getElementById('playground');
         this.ctx = this.playground.getContext("2d");
         this.input = document.getElementById('input');
+        this.status = 0;
         this.init();
     };
     InputImg.prototype = {
@@ -38,12 +39,16 @@
                 that.playground.width = that.image.width;
                 that.playground.height = that.image.height;
                 that.ctx.drawImage(that.image, 0, 0, that.image.width, that.image.height);
+                that.status = 1;
             }
-            that.image.src = s; 
+            that.image.src = s;
         },
         bind:function(){
             var that = this;
             that.playground.addEventListener('click', function() {
+                if(that.status != 0){
+                    return;
+                }
                 return that.input.click();
             }, false);
             that.input.addEventListener('change', function(e) {
