@@ -1,0 +1,109 @@
+body, button, input, select, textarea {
+    font-family: 'helvetica neue',tahoma,'hiragino sans gb',stheiti,'wenquanyi micro hei',\5FAE\8F6F\96C5\9ED1,\5B8B\4F53,sans-serif;
+}
+html{
+    background:#d4d4d4;
+    border:2px solid #9b9c97;
+    height:100%;
+    overflow-y:hidden;
+}
+body{
+    border:2px solid #e7e7e5;
+    height:100%;
+    background:#8f8f8f;
+}
+#about{
+    cursor:pointer;
+}
+#name{
+    color:#bfbfbf!important;
+    font-weight:bolder!important;
+    font-size:20px!important;
+    line-height:32px!important;
+    text-shadow: 1px 1px rgba(255, 255, 255, 0.43), -1px -1px rgba(201, 201, 201, 0.71);
+}
+#header{
+    cursor:default;
+}
+#header ul{
+    height:32px;
+    overflow:hidden;
+    background:#d6d6d6;
+    margin: 0;
+    padding: 2px 4px;
+}
+#header ul li{
+    float:left;
+    list-style-type:none;
+    height: 100%;
+    font-size:14px;
+    line-height:36px;
+    margin-right:15px;
+    color:#131720;
+}
+#content{
+    position:relative;
+    cursor:default;
+    border:1px solid #636363;
+    padding:1px 1px 30px 1px;
+    position:relative;
+    height:90%;
+    background:#8f8f8f;
+    border-radius:2px;
+    border-bottom:none;
+}
+#footer{
+    color:#fff;
+    cursor:default;
+    text-align:center;
+    margin-top:4px;
+}
+#status{
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+#scene{
+    position:absolute;
+    top:1px;
+    left:1px;
+    width:70%;
+    height:100%;
+}
+#panel{
+    position:absolute;
+    top:1px;
+    right:10px;
+    width:28%;
+    height:100%;
+}
+.title{
+    display: inline-block;
+    position: absolute;
+    color: #38464f;
+    font-size: 10px;
+    top: 11px;
+    left: 14px;
+    line-height: 18px;
+    padding: 0px 10px;
+    height: 18px;
+    border-top: 1px solid #E2E2E2;
+    border-bottom: 1px solid rgba(50, 50, 48, 0.36);
+    background: -moz-linear-gradient(#CFCFCF, #A8A8A8);
+    background: -webkit-gradient(linear, center top, center bottom, from(#CFCFCF), to(#A8A8A8));
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    text-shadow: 0 1px 0 #cfcfcf;
+}
+.mask{
+    position:absolute;
+    top:31px;
+    left:4px;
+    background:#D3D3D3;
+    width: 100%;
+    border-radius:2px;
+    height:90%;
+    border-top: 1px solid rgba(50, 50, 48, 0.36);
+    box-shadow: 0 15px 40px 10px rgba(0,0,0,.25), 0 0 0 1px rgba(0,0,0,.16);
+}
+

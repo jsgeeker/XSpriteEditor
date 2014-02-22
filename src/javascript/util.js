@@ -1,12 +1,10 @@
 ;define('util',function(){
-    function Util(){
-    }
     function __typeof(type){
         return function(obj){
             return Object.prototype.toString.call(obj) === '[object ' + type + ']';
         };
     };
-    Util.prototype = {
+    var Util = {
         indexOf:function(i,s){
             return !!~s.indexOf(i);
         },
