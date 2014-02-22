@@ -18,9 +18,9 @@
     </header>
     <section id="content">
         <div id="scene">
-            <div class="title">scene sfsfsdf.jpg [X]</div>
+            <div class="title">scene <span>未添加图片</span></div>
             <div class="mask">
-                <canvas id="playground"></canvas>
+                <canvas id="playground" title="点击选择所需区域"></canvas>
                 <div id="frames">
                     <div class="">dive</div>
                     <div class="status">
@@ -29,10 +29,11 @@
                 </div>
             </div>
         </div>
+        <input type="file" accept="image/*" id="input" style="display:none;"/>
         <div id="panel">
-            <div class="title">scene sfsfsdf.jpg [X]</div>
+            <div class="title">preview</div>
             <div class="mask">
-                <canvas id="preview"></canvas>
+                <canvas id="preview" title="操作区域在下面"></canvas>
             </div>
         </div>
     </section>

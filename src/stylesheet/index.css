@@ -113,14 +113,19 @@ body{
     margin:20px 30px 0 0;
 }
 #playground{
-    background:green;
-    width:600px;
-    height:600px;
+    background:url(http://img03.taobaocdn.com/tps/i3/T1mMv7XgBXXXaSQP_X-16-16.png);
     margin:15px 30px 0 0;
+    cursor:pointer;
+    box-shadow: 0 1px 4px 1px rgba(0,0,0,.25), 0 0 0 1px rgba(0,0,0,.16);
 }
 #preview{
-    background:green;
+    background:url(http://img03.taobaocdn.com/tps/i3/T1mMv7XgBXXXaSQP_X-16-16.png);
     width:300px;
     height:300px;
     margin:15px 0 0 20px;
+    cursor:not-allowed;
+    box-shadow: 0 1px 4px 1px rgba(0,0,0,.25), 0 0 0 1px rgba(0,0,0,.16);
+}
+#input{
+    display:none;
 }
