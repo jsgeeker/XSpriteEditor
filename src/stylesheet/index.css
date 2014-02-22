@@ -58,10 +58,11 @@ body{
     text-align:center;
     margin-top:4px;
 }
-#status{
+.status{
     position:absolute;
-    bottom:0;
-    left:0;
+    left:6px;
+    top:90%;
+    width:100%;
 }
 #scene{
     position:absolute;
@@ -83,7 +84,7 @@ body{
     color: #38464f;
     font-size: 10px;
     top: 11px;
-    left: 14px;
+    left: 26px;
     line-height: 18px;
     padding: 0px 10px;
     height: 18px;
