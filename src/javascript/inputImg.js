@@ -1,4 +1,4 @@
-;define('inputImg',function(){
+;define('inputImg',['util'],function(_){
     var MAX_HEIGHT = 600;
     function InputImg(){
         this.playground = document.getElementById('playground');
@@ -33,8 +33,11 @@
             that.image = new Image(); 
             that.image.onload = function(){ 
                 if(that.image.height > MAX_HEIGHT) {
-                    that.playground.style.zoom = MAX_HEIGHT / that.image.height;
+                    that.zoom = MAX_HEIGHT / that.image.height;
+                }else{
+                    that.zoom = 1;
                 }
+                that.playground.style.zoom = that.zoom;
                 that.ctx.clearRect(0, 0, that.ctx.width, that.ctx.height);
                 that.playground.width = that.image.width;
                 that.playground.height = that.image.height;
@@ -45,15 +48,33 @@
         },
         bind:function(){
             var that = this;
-            that.playground.addEventListener('click', function() {
-                if(that.status != 0){
+            that.playground.addEventListener('click', function(e) {
+                if(that.status == 0){
+                    return that.input.click();
+                }
+                console.log(e)
+            }, false);
+            that.playground.addEventListener('mousemove', function(e) {
+                if(that.status == 0){
                     return;
                 }
-                return that.input.click();
+                that.detectMouse(e.offsetX/that.zoom,e.offsetY/that.zoom);
             }, false);
             that.input.addEventListener('change', function(e) {
                 that.fillPlayGround(e.target.files[0]);
             }, false);
+        },
+        detectMouse:function(x,y){
+            var that = this;
+            var pixel = that.ctx.getImageData(x,y,1,1).data;
+            var pixcolor = "rgba(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + "," + pixel[3] + ")";
+            if(pixcolor == 'rgba(0,0,0,0)'){
+                that.playground.style.cursor = 'default';
+                that.playground.title = '此区域不可点';
+            }else{
+                that.playground.style.cursor = 'pointer';
+                that.playground.title = '请点击选中';
+            }
         }
     };
     return InputImg;
