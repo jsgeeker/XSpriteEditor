@@ -52,7 +52,7 @@
                 if(that.status == 0){
                     return that.input.click();
                 }
-                console.log(e)
+                that.detectMouse(e.offsetX/that.zoom,e.offsetY/that.zoom)&&that.detactRec(e.offsetX/that.zoom,e.offsetY/that.zoom);
             }, false);
             that.playground.addEventListener('mousemove', function(e) {
                 if(that.status == 0){
@@ -74,7 +74,11 @@
             }else{
                 that.playground.style.cursor = 'pointer';
                 that.playground.title = '请点击选中';
+                return true;
             }
+        },
+        detactRec:function(x,y){
+            
         }
     };
     return InputImg;
