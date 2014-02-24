@@ -1,5 +1,11 @@
 ;define('inputImg',['util'],function(_){
     var MAX_HEIGHT = 600;
+	function Rect(x, y, width, height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+	}
     function InputImg(){
         this.playground = document.getElementById('playground');
         this.ctx = this.playground.getContext("2d");
@@ -52,7 +58,7 @@
                 if(that.status == 0){
                     return that.input.click();
                 }
-                that.detectMouse(e.offsetX/that.zoom,e.offsetY/that.zoom)&&that.detactRec(e.offsetX/that.zoom,e.offsetY/that.zoom);
+                that.detectPixel(e.offsetX/that.zoom,e.offsetY/that.zoom)&&that.detectRect(e.offsetX/that.zoom,e.offsetY/that.zoom);
             }, false);
             that.playground.addEventListener('mousemove', function(e) {
                 if(that.status == 0){
@@ -66,19 +72,45 @@
         },
         detectMouse:function(x,y){
             var that = this;
-            var pixel = that.ctx.getImageData(x,y,1,1).data;
-            var pixcolor = "rgba(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + "," + pixel[3] + ")";
-            if(pixcolor == 'rgba(0,0,0,0)'){
+            if(!that.detectPixel(x,y)){
                 that.playground.style.cursor = 'default';
                 that.playground.title = '此区域不可点';
             }else{
                 that.playground.style.cursor = 'pointer';
                 that.playground.title = '请点击选中';
-                return true;
             }
         },
-        detactRec:function(x,y){
+        detectPixel:function(x,y){
+            var that = this;
+            var pixel = that.ctx.getImageData(x,y,1,1).data;
+            var pixcolor = "rgba(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + "," + pixel[3] + ")";
+            return pixcolor !== 'rgba(0,0,0,0)';
+        },
+        detectRect:function(x,y){
+            var that = this;
+            var rect = new Rect(x,y,1,1);
+            function detectTop(){
+                
+            }
+            function detectRight(){
+                
+            }
+            function detectBottom(){
+                
+            }
+            function detectLeft(){
+                
+            }
             
+            //that.drawRect(x,y,10,10);
+        },
+        drawRect:function(x,y,w,h){
+            var that = this;
+            that.ctx.beginPath();
+            that.ctx.rect(x,y,w,h);
+            that.ctx.fillStyle="rgba(0,0,0,.2)";
+            that.ctx.fill();
+            that.ctx.stroke();
         }
     };
     return InputImg;

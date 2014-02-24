@@ -8,7 +8,6 @@
     };
     PreView.prototype = {
         init:function(){
-            console.log(this.ctx)
             this.addLine();
         },
         addLine:function(){
