@@ -58,7 +58,10 @@
                 if(that.status == 0){
                     return that.input.click();
                 }
-                that.detectPixel(e.offsetX/that.zoom,e.offsetY/that.zoom)&&that.detectRect(e.offsetX/that.zoom,e.offsetY/that.zoom);
+                if(that.isAlphaEmpty(that.ctx.getImageData(e.offsetX/that.zoom,e.offsetY/that.zoom,1,1).data)){
+                    return;
+                }
+                that.detectRect(e.offsetX/that.zoom,e.offsetY/that.zoom);
             }, false);
             that.playground.addEventListener('mousemove', function(e) {
                 if(that.status == 0){
@@ -72,7 +75,7 @@
         },
         detectMouse:function(x,y){
             var that = this;
-            if(!that.detectPixel(x,y)){
+            if(that.isAlphaEmpty(that.ctx.getImageData(x,y,1,1).data)){
                 that.playground.style.cursor = 'default';
                 that.playground.title = '此区域不可点';
             }else{
@@ -80,34 +83,84 @@
                 that.playground.title = '请点击选中';
             }
         },
-        detectPixel:function(x,y){
-            var that = this;
-            var pixel = that.ctx.getImageData(x,y,1,1).data;
-            var pixcolor = "rgba(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + "," + pixel[3] + ")";
-            return pixcolor !== 'rgba(0,0,0,0)';
+        isAlphaEmpty:function(data){
+            return /{\"0":0(,\"\d+\":0)+}/.test(JSON.stringify(data));
         },
         detectRect:function(x,y){
             var that = this;
+            setTimeout(function(){
+                that.drawRect(that.calculate(x,y));
+            },10);
+        },
+        calculate:function(x,y){
             var rect = new Rect(x,y,1,1);
+            var that = this;
+            var i = 0;
+            var data;
+            function detectLine(x,y,width,scrollx){
+                if(scrollx){
+                    data = that.ctx.getImageData(x,y,width,1).data;
+                }else{
+                    data = that.ctx.getImageData(x,y,1,width).data;
+                }
+                return !that.isAlphaEmpty(data);
+            }
             function detectTop(){
-                
+                if(i==4){
+                    return rect;
+                }
+                if(detectLine(rect.x,rect.y-1,rect.width,true)){
+                    i =0;
+                    rect.y --;
+                    rect.height++;
+                }else{
+                    i++;
+                }
+                return detectRight();
             }
             function detectRight(){
-                
+                if(i==4){
+                    return rect;
+                }
+                if(detectLine(rect.x+rect.width+1,rect.y,rect.height,false)){
+                    i =0;
+                    rect.width ++;
+                }else{
+                    i++;
+                }
+                return detectBottom();
             }
             function detectBottom(){
-                
+                if(i==4){
+                    return rect;
+                }
+                if(detectLine(rect.x,rect.y+rect.height+1,rect.width,true)){
+                    rect.height++;
+                    i =0;
+                }else{
+                    i++;
+                }
+                return detectLeft();
             }
             function detectLeft(){
-                
+                if(i==4){
+                    return rect;
+                }
+                if(detectLine(rect.x-1,rect.y,rect.height,false)){
+                    rect.x--;
+                    rect.width++;
+                    i =0;
+                }else{
+                    i++;
+                }
+                return detectTop();
             }
-            
-            //that.drawRect(x,y,10,10);
+            return detectTop();
         },
-        drawRect:function(x,y,w,h){
+        drawRect:function(rect){
             var that = this;
             that.ctx.beginPath();
-            that.ctx.rect(x,y,w,h);
+            that.ctx.rect(rect.x,rect.y,rect.width,rect.height);
             that.ctx.fillStyle="rgba(0,0,0,.2)";
             that.ctx.fill();
             that.ctx.stroke();
