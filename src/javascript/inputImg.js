@@ -1,5 +1,6 @@
-;define('inputImg',['util'],function(_){
+;define('inputImg',['util','msg'],function(_,Msg){
     var MAX_HEIGHT = 600;
+    var msg = new Msg();
 	function Rect(x, y, width, height) {
 		this.x = x;
 		this.y = y;
@@ -89,7 +90,12 @@
         detectRect:function(x,y){
             var that = this;
             setTimeout(function(){
-                that.drawRect(that.calculate(x,y));
+                var rect = that.calculate(x,y);
+                that.drawRect(rect);
+                msg.send('selected',{
+                    rect:rect,
+                    data:'1231s'
+                });
             },10);
         },
         calculate:function(x,y){

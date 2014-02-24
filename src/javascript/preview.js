@@ -1,4 +1,5 @@
-;define('preview',function(){
+;define('preview',['msg'],function(Msg){
+    var msg = new Msg();
     var WIDTH = 300,
         HEIGHT = 300;
     function PreView(){
@@ -9,6 +10,7 @@
     PreView.prototype = {
         init:function(){
             this.addLine();
+            this.bindEvent();
         },
         addLine:function(){
             var that = this;
@@ -22,6 +24,11 @@
             canvas.lineTo(WIDTH*2/3, WIDTH/2);
             canvas.closePath();
             canvas.stroke();
+        },
+        bindEvent:function(){
+            msg.listen('selected',function(d){
+                console.log(d)
+            });
         }
     };
     return PreView;
