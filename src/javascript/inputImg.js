@@ -94,7 +94,7 @@
                 that.drawRect(rect);
                 msg.send('selected',{
                     rect:rect,
-                    data:'1231s'
+                    data:that.ctx.getImageData(rect.x,rect.y,rect.width,rect.height)
                 });
             },10);
         },

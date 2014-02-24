@@ -26,9 +26,18 @@
             canvas.stroke();
         },
         bindEvent:function(){
+            var that = this;
             msg.listen('selected',function(d){
-                console.log(d)
+                that.drawImg(d);
             });
+        },
+        drawImg:function(d){
+            var that = this;
+            var data = d.data;
+            that.ctx.putImageData(data,10,70);
+        },
+        storage:function(){
+            
         }
     };
     return PreView;
