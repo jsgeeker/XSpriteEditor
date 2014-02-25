@@ -92,10 +92,6 @@
             setTimeout(function(){
                 var rect = that.calculate(x,y);
                 that.drawRect(rect);
-                msg.send('selected',{
-                    rect:rect,
-                    data:that.ctx.getImageData(rect.x,rect.y,rect.width,rect.height)
-                });
             },10);
         },
         calculate:function(x,y){
@@ -165,6 +161,10 @@
         },
         drawRect:function(rect){
             var that = this;
+            msg.send('selected',{
+                rect:rect,
+                data:that.ctx.getImageData(rect.x,rect.y,rect.width,rect.height)
+            });
             that.ctx.beginPath();
             that.ctx.rect(rect.x,rect.y,rect.width,rect.height);
             that.ctx.fillStyle="rgba(0,0,0,.2)";

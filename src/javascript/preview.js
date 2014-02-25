@@ -28,13 +28,24 @@
         bindEvent:function(){
             var that = this;
             msg.listen('selected',function(d){
+                that.clear();
                 that.drawImg(d);
             });
         },
         drawImg:function(d){
             var that = this;
-            var data = d.data;
-            that.ctx.putImageData(data,10,70);
+            that.data = d.data;
+            that.rect = d.rect;
+            that.x = (WIDTH-that.rect.width)/2;
+            that.y = (HEIGHT - that.rect.height)/2;
+            that.ctx.putImageData(that.data,that.x,that.y);
+        },
+        clear:function(){
+            var that = this;
+            if(!that.data){
+                return;
+            }
+            that.ctx.clearRect(that.x,that.y,that.rect.width,that.rect.height);
         },
         storage:function(){
             
