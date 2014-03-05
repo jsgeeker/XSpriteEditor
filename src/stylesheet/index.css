@@ -2,14 +2,10 @@ body, button, input, select, textarea {
     font-family: 'helvetica neue',tahoma,'hiragino sans gb',stheiti,'wenquanyi micro hei',\5FAE\8F6F\96C5\9ED1,\5B8B\4F53,sans-serif;
 }
 html{
-    background:#d4d4d4;
     border:2px solid #9b9c97;
-    height:100%;
     overflow-x:hidden;
 }
 body{
-    border:2px solid #e7e7e5;
-    height:100%;
     background:#8f8f8f;
 }
 #about{
@@ -62,7 +58,7 @@ body{
 }
 #scene{
     position:absolute;
-    top:1px;
+    top:15px;
     left:1px;
     width:70%;
     height:100%;
@@ -72,7 +68,7 @@ body{
 }
 #panel{
     position:absolute;
-    top:1px;
+    top:15px;
     right:10px;
     width:28%;
     height:100%;
@@ -84,8 +80,8 @@ body{
     position: absolute;
     color: #38464f;
     font-size: 10px;
-    top: 11px;
-    left: 26px;
+    top: -10px;
+    left: 4px;
     line-height: 18px;
     padding: 0px 10px;
     height: 18px;
@@ -96,6 +92,7 @@ body{
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     text-shadow: 0 1px 0 #cfcfcf;
+    z-index: 99;
 }
 .mask{
     position:absolute;
@@ -112,8 +109,9 @@ body{
 }
 #frames{
     margin-top:10px;
-    height:200px;
-    padding:0 10px;
+    height:60px;
+    padding:0 160px;
+    background:#666;
 }
 #playground{
     background:url(http://img03.taobaocdn.com/tps/i3/T1mMv7XgBXXXaSQP_X-16-16.png);
@@ -127,4 +125,26 @@ body{
 }
 #input{
     display:none;
+}
+#timeLine{
+    height:6px;
+    background: url(http://gtms03.alicdn.com/tps/i3/T1MO9SFCBdXXct4H6a-50-6.png) repeat-x;
+}
+#layers{
+    width:100%;
+    padding:0px;
+    margin:0px;
+    margin-top:-5px;
+    list-style: none;
+}
+#layers li{
+    background:#fff;
+    height:50px;
+    width:10px;
+    float:left;
+    color:#000;
+    font-size:10px;
+    text-align:center;
+    outline:1px solid #fff;
+    cursor:pointer;
 }
