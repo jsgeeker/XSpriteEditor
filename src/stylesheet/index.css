@@ -5,7 +5,7 @@ html{
     background:#d4d4d4;
     border:2px solid #9b9c97;
     height:100%;
-    overflow:hidden;
+    overflow-x:hidden;
 }
 body{
     border:2px solid #e7e7e5;
@@ -45,9 +45,7 @@ body{
     position:relative;
     cursor:default;
     border:1px solid #636363;
-    padding:1px 1px 30px 1px;
     position:relative;
-    height:94%;
     background:#8f8f8f;
     border-radius:2px;
     border-bottom:none;
@@ -58,8 +56,9 @@ body{
     text-align:center;
     margin-top:4px;
 }
-.status{
+#status{
     width:100%;
+    margin-top:4px;
 }
 #scene{
     position:absolute;
@@ -68,6 +67,8 @@ body{
     width:70%;
     height:100%;
     text-align:right;
+    min-height:690px;
+    min-width:640px;
 }
 #panel{
     position:absolute;
@@ -75,6 +76,8 @@ body{
     right:10px;
     width:28%;
     height:100%;
+    min-width:340px;
+    min-height:360px;
 }
 .title{
     display: inline-block;
@@ -96,31 +99,29 @@ body{
 }
 .mask{
     position:absolute;
-    top:31px;
+    top:10px;
     left:4px;
     background:#D3D3D3;
     width: 100%;
     border-radius:2px;
-    height:90%;
+    padding-bottom:20px;
     border-top: 1px solid rgba(50, 50, 48, 0.36);
     box-shadow: 0 15px 40px 10px rgba(0,0,0,.25), 0 0 0 1px rgba(0,0,0,.16);
+    text-align:center;
+    padding-top:20px;
 }
 #frames{
-    background:blue;
-    float:right;
-    width:96%;
-    margin:0 auto;
-    margin:20px 30px 0 0;
+    margin-top:10px;
+    height:200px;
+    padding:0 10px;
 }
 #playground{
     background:url(http://img03.taobaocdn.com/tps/i3/T1mMv7XgBXXXaSQP_X-16-16.png);
-    margin:15px 30px 0 0;
     cursor:pointer;
     box-shadow: 0 1px 4px 1px rgba(0,0,0,.25), 0 0 0 1px rgba(0,0,0,.16);
 }
 #preview{
     background:url(http://img03.taobaocdn.com/tps/i3/T1mMv7XgBXXXaSQP_X-16-16.png);
-    margin:15px 0 0 20px;
     cursor:not-allowed;
     box-shadow: 0 1px 4px 1px rgba(0,0,0,.25), 0 0 0 1px rgba(0,0,0,.16);
 }
