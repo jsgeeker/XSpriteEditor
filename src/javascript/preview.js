@@ -11,6 +11,7 @@
         init:function(){
             this.addLine();
             this.bindEvent();
+            this.query = [];
         },
         addLine:function(){
             var that = this;
@@ -30,6 +31,8 @@
             msg.listen('selected',function(d){
                 that.clear();
                 that.drawImg(d);
+                that.storage(d);
+                msg.send('timerView',that.query);
             });
         },
         drawImg:function(d){
@@ -47,8 +50,9 @@
             }
             that.ctx.clearRect(that.x,that.y,that.rect.width,that.rect.height);
         },
-        storage:function(){
-            
+        storage:function(d){
+            var that = this;
+            console.log(d)
         }
     };
     return PreView;

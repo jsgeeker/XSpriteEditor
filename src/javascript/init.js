@@ -2,7 +2,7 @@
 ;aml.config({
     path: (!~location.hostname.indexOf('github') ? 'src/javascript/' : 'src/javascript/')
 });
-;define('init',['util','inputImg','preview','timer'],function(Util,InputImg,PreView,Timer){
+;define('init',['util','inputImg','preview','timer','status'],function(Util,InputImg,PreView,Timer,Status){
     var _ = Util;
     function XSpriteEditor(){
         this.init();
@@ -13,6 +13,7 @@
             this.inputImg();
             this.preView();
             this.timer();
+            this.sta();
         },
         inputImg:function(){
             new InputImg();
@@ -22,6 +23,9 @@
         },
         timer:function(){
             new Timer();
+        },
+        sta:function(){
+            new Status();
         },
         bind:function(){
             

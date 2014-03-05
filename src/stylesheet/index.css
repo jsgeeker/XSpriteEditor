@@ -138,13 +138,14 @@ body{
     list-style: none;
 }
 #layers li{
-    background:#fff;
+    background:#000;
     height:50px;
     width:10px;
     float:left;
-    color:#000;
+    color:#fff;
     font-size:10px;
     text-align:center;
     outline:1px solid #fff;
     cursor:pointer;
+    padding-top: 2px;
 }

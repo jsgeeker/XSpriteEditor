@@ -29,6 +29,7 @@
                 alert('The File APIs are not fully supported in this browser.');
                 return;
             }
+            msg.send('fileRead',s);
             that.reader = new FileReader();
             that.reader.readAsDataURL(s);
 	        that.reader.onload = function(e){
