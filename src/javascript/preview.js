@@ -2,6 +2,14 @@
     var msg = new Msg();
     var WIDTH = 300,
         HEIGHT = 300;
+    var up = document.getElementById('up'),
+        right = document.getElementById('right'),
+        down = document.getElementById('down'),
+        left = document.getElementById('left'),
+        prev = document.getElementById('prev'),
+        next = document.getElementById('next'),
+        start = document.getElementById('start'),
+        stop = document.getElementById('stop');
     function PreView(){
         this.preview = document.getElementById('preview');
         this.ctx = this.preview.getContext('2d');
@@ -29,14 +37,52 @@
         bindEvent:function(){
             var that = this;
             msg.listen('selected',function(d){
-                that.clear();
-                that.drawImg(d);
                 that.storage(d);
+                that.drawView();
                 msg.send('timerView',that.query);
             });
+            up.addEventListener('click',function(e){
+                that.up();
+                that.drawView();
+            });
+            down.addEventListener('click',function(e){
+                that.down();
+                that.drawView();
+            });
+            left.addEventListener('click',function(e){
+                that.left();
+                that.drawView();
+            });
+            right.addEventListener('click',function(e){
+                that.right();
+                that.drawView();
+            });
+        },
+        up:function(){
+            var that = this;
+            that.query[that.index].rect.y--;
+        },
+        down:function(){
+            var that = this;
+            that.query[that.index].rect.y++;
+        },
+        left:function(){
+            var that = this;
+            that.query[that.index].rect.x--;
+        },
+        right:function(){
+            var that = this;
+            that.query[that.index].rect.x++;
+        },
+        drawView:function(){
+            var that = this;
+            var data = that.query[that.index];
+            console.log(data)
+            that.drawImg(data);
         },
         drawImg:function(d){
             var that = this;
+            that.clear();
             that.data = d.data;
             that.rect = d.rect;
             that.x = (WIDTH-that.rect.width)/2;
@@ -54,6 +100,7 @@
         storage:function(d){
             var that = this;
             that.query.push(d);
+            that.index = that.query.length-1;
         }
     };
     return PreView;
