@@ -128,20 +128,20 @@ body{
     display:none;
 }
 #timeLine{
-    height:6px;
-    background: url(http://gtms03.alicdn.com/tps/i3/T1MO9SFCBdXXct4H6a-50-6.png) repeat-x;
+    height:12px;
+    background: url(http://gtms04.alicdn.com/tps/i4/T1zYi7FylaXXasJHQ3-100-12.png) repeat-x;
 }
 #layers{
     width:100%;
     padding:0px;
     margin:0px;
-    margin-top:-5px;
+    margin-top:-12px;
     list-style: none;
 }
 #layers li{
     background:#000;
     height:50px;
-    width:10px;
+    width:20px;
     float:left;
     color:#fff;
     font-size:10px;
@@ -159,4 +159,8 @@ body{
     text-align: center;
     width:100%;
     height:20px;
+}
+#layers .current{
+    background:#fff;
+    color:#000;
 }

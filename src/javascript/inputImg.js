@@ -162,13 +162,18 @@
         },
         drawRect:function(rect){
             var that = this;
+            var offset = {
+                x:0,
+                y:0
+            };
             msg.send('selected',{
                 rect:rect,
+                offset:offset,
                 data:that.ctx.getImageData(rect.x,rect.y,rect.width,rect.height)
             });
             that.ctx.beginPath();
             that.ctx.rect(rect.x,rect.y,rect.width,rect.height);
-            that.ctx.fillStyle="rgba(0,0,0,.2)";
+            that.ctx.fillStyle="rgba(0,0,0,0.2)";
             that.ctx.fill();
             that.ctx.stroke();
         }
