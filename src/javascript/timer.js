@@ -10,16 +10,19 @@
         },
         upDateView:function(){
             var that = this;
+            layers.innerHTML = '';
             _.each(that.query,function(i,key){
+                var _key = key.charAt(key.length-1);
                 var elm = document.createElement("li");
-                elm.innerHTML = key;
+                elm.id = 'J_frame'+ key;
+                elm.innerHTML = _key;
                 layers.appendChild(elm);
             });
         },
         bind:function(){
             var that = this;
             msg.listen('timerView',function(query){
-                that.query = [1,2,3,4,5,6]||query;
+                that.query = query;
                 that.upDateView();
             });
         }

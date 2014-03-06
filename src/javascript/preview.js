@@ -16,7 +16,7 @@
         addLine:function(){
             var that = this;
             var canvas = that.ctx;
-            canvas.strokeStyle = "#999";
+            canvas.strokeStyle = "rgba(100, 100, 100, 0.4)";
             canvas.lineWidth = 1;
             canvas.beginPath();
             canvas.moveTo(WIDTH/2, WIDTH/3);
@@ -42,17 +42,18 @@
             that.x = (WIDTH-that.rect.width)/2;
             that.y = (HEIGHT - that.rect.height)/2;
             that.ctx.putImageData(that.data,that.x,that.y);
+            that.addLine();
         },
         clear:function(){
             var that = this;
             if(!that.data){
                 return;
             }
-            that.ctx.clearRect(that.x,that.y,that.rect.width,that.rect.height);
+            that.ctx.clearRect(0,0,WIDTH,HEIGHT);
         },
         storage:function(d){
             var that = this;
-            console.log(d)
+            that.query.push(d);
         }
     };
     return PreView;
