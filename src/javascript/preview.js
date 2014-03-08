@@ -246,18 +246,12 @@
         drawImg:function(d){
             var that = this;
             that.clear();
-            that.data = d.data;
-            that.rect = d.rect;
-            that.offset = d.offset;
-            var arr = that.factory(WIDTH,HEIGHT,that.rect);
+            var arr = that.factory(WIDTH,HEIGHT,d);
             that.ctx.drawImage(that.image,arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6],arr[7]);
             that.addLine();
         },
         clear:function(){
             var that = this;
-            if(!that.data){
-                return;
-            }
             that.ctx.clearRect(0,0,WIDTH,HEIGHT);
         },
         storage:function(d){
@@ -265,15 +259,17 @@
             that.query.push(d);
             that.index = that.query.length - 1;
         },
-        factory:function(w,h,rect){
+        factory:function(w,h,d){
             var that = this;
-            return [rect.x,rect.y,rect.width,rect.height,(w - rect.width)/2 + that.offset.x,(h - rect.height)/2 + that.offset.y,rect.width,rect.height];
+            var rect = d.rect;
+            var offset = d.offset;
+            return [rect.x,rect.y,rect.width,rect.height,(w - rect.width)/2 + offset.x,(h - rect.height)/2 + offset.y,rect.width,rect.height];
         },
         export:function(){
             var that = this;
             var _arr = [];
             _.each(that.query,function(i){
-                _arr.push(that.factory(WIDTH,HEIGHT,i.rect));
+                _arr.push(that.factory(WIDTH,HEIGHT,i));
             });
             exp.innerHTML = JSON.stringify(_arr);
         },
