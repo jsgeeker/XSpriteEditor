@@ -1,5 +1,6 @@
 ;define('inputImg',['util','msg'],function(_,Msg){
     var MAX_HEIGHT = 600;
+    var PREVENT = 121;
     var msg = new Msg();
 	function Rect(x, y, width, height) {
 		this.x = x;
@@ -60,7 +61,8 @@
                 if(that.status == 0){
                     return that.input.click();
                 }
-                if(that.isAlphaEmpty(that.ctx.getImageData(e.offsetX/that.zoom,e.offsetY/that.zoom,1,1).data)){
+                var data = that.ctx.getImageData(e.offsetX/that.zoom,e.offsetY/that.zoom,1,1).data;
+                if(that.isAlphaEmpty(data)||that.isPrevent(data)){
                     return;
                 }
                 that.detectRect(e.offsetX/that.zoom,e.offsetY/that.zoom);
@@ -80,10 +82,31 @@
             if(that.isAlphaEmpty(that.ctx.getImageData(x,y,1,1).data)){
                 that.playground.style.cursor = 'default';
                 that.playground.title = '此区域不可点';
+                msg.send('moving',{
+                    x:x,
+                    y:y,
+                    status:'unavailable'
+                });
+            }else if(that.isPrevent(that.ctx.getImageData(x,y,1,1).data)){
+                that.playground.style.cursor = 'default';
+                that.playground.title = '此区域已被选择过了';
+                msg.send('moving',{
+                    x:x,
+                    y:y,
+                    status:'selected'
+                });
             }else{
                 that.playground.style.cursor = 'pointer';
                 that.playground.title = '请点击选中';
+                msg.send('moving',{
+                    x:x,
+                    y:y,
+                    status:'available'
+                });
             }
+        },
+        isPrevent:function(data){
+            return data[3] == PREVENT;
         },
         isAlphaEmpty:function(data){
             return /{\"0":0(,\"\d+\":0)+}/.test(JSON.stringify(data));
@@ -173,8 +196,22 @@
             });
             that.ctx.beginPath();
             that.ctx.rect(rect.x,rect.y,rect.width,rect.height);
-            that.ctx.fillStyle="rgba(0,0,0,0.2)";
+            that.ctx.fillStyle="rgba(50,50,50,0.2)";
             that.ctx.fill();
+            var back = that.ctx.createImageData(rect.width, rect.height);
+            var arr = back.data;
+            var data = that.ctx.getImageData(rect.x,rect.y,rect.width,rect.height).data;
+            for(var i=0,len = data.length;i<len;i+=4){
+                var red = data[i],
+                    green = data[i+1],
+                    blue = data[i+2],
+                    alpha = data[i+3];
+                arr[i] = red;
+                arr[i+1] = green;
+                arr[i+2] = blue;
+                arr[i+3] = PREVENT;
+            }
+            that.ctx.putImageData(back,rect.x,rect.y);
             that.ctx.stroke();
         }
     };

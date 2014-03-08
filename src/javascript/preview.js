@@ -1,4 +1,4 @@
-;define('preview',['msg'],function(Msg){
+;define('preview',['msg','util'],function(Msg,_){
     var msg = new Msg();
     var WIDTH = 300,
         HEIGHT = 300;
@@ -23,6 +23,7 @@
         stop = document.getElementById('stop'),
         big = document.getElementById('big'),
         small = document.getElementById('small');
+        del = document.getElementById('del');
     function PreView(){
         this.preview = document.getElementById('preview');
         this.ctx = this.preview.getContext('2d');
@@ -100,6 +101,39 @@
                 that.stop();
                 that.prev();
             });
+            del.addEventListener('click',function(){
+                that.stop();
+                that.del();
+            });
+            document.addEventListener("keydown",function(e){
+                that.stop();
+                switch(e.keyCode){
+                    case 38:
+                        that.up();
+                        that.drawView();
+                        break;
+                    case 40:
+                        that.down();
+                        that.drawView();
+                        break;
+                    case 37:
+                        that.left();
+                        that.drawView();
+                        break;
+                    case 39:
+                        that.right();
+                        that.drawView();
+                        break;
+                    case 8:
+                        e.preventDefault();
+                        that.del();
+                        break;
+                    case 32:
+                        e.preventDefault();
+                        that.next();
+                        break;
+                }
+            },false);
             msg.listen('timerClick',function(d){
                 var i = parseInt(d);
                 that.stop();
@@ -158,7 +192,6 @@
                 query:that.query,
                 current:that.index
             });
-
         },
         prev:function(){
             var that = this;
@@ -171,6 +204,30 @@
                 query:that.query,
                 current:that.index
             });
+        },
+        del:function(){
+            var that = this;
+            var _arr = [];
+            _.each(that.query,function(v,k){
+                if(k != that.index){
+                    _arr.push(v);
+                }
+            });
+            that.query = _arr;
+            if(that.index!=0){
+                that.index --;
+                that.drawView();
+                msg.send('timerView',{
+                    query:that.query,
+                    current:that.index
+                });
+            }else{
+                that.clear();
+                msg.send('timerView',{
+                    query:that.query,
+                    current:that.index
+                });
+            }
         },
         drawView:function(){
             var that = this;
