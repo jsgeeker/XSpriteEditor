@@ -22,8 +22,9 @@
         run = document.getElementById('run'),
         stop = document.getElementById('stop'),
         big = document.getElementById('big'),
-        small = document.getElementById('small');
-        del = document.getElementById('del');
+        small = document.getElementById('small'),
+        del = document.getElementById('del'),
+        exp = document.getElementById('export');
     function PreView(){
         this.preview = document.getElementById('preview');
         this.ctx = this.preview.getContext('2d');
@@ -32,7 +33,7 @@
     PreView.prototype = {
         init:function(){
             this.addLine();
-            this.bindEvent();
+            this.bind();
             this.query = [];
         },
         addLine:function(){
@@ -48,7 +49,7 @@
             canvas.closePath();
             canvas.stroke();
         },
-        bindEvent:function(){
+        bind:function(){
             var that = this;
             msg.listen('selected',function(d){
                 that.storage(d);
@@ -57,6 +58,9 @@
                     query:that.query,
                     current:that.index
                 });
+            });
+            msg.listen('loadImg',function(d){
+                that.image = d;
             });
             up.addEventListener('click',function(e){
                 that.stop();
@@ -131,6 +135,10 @@
                     case 32:
                         e.preventDefault();
                         that.next();
+                        break;
+                    case 13:
+                        e.preventDefault();
+                        that.run();
                         break;
                 }
             },false);
@@ -233,6 +241,7 @@
             var that = this;
             var data = that.query[that.index];
             that.drawImg(data);
+            that.export();
         },
         drawImg:function(d){
             var that = this;
@@ -240,9 +249,8 @@
             that.data = d.data;
             that.rect = d.rect;
             that.offset = d.offset;
-            that.x = (WIDTH - that.rect.width)/2 + that.offset.x;
-            that.y = (HEIGHT - that.rect.height)/2 + that.offset.y;
-            that.ctx.putImageData(that.data,that.x,that.y);
+            var arr = that.factory(WIDTH,HEIGHT,that.rect);
+            that.ctx.drawImage(that.image,arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6],arr[7]);
             that.addLine();
         },
         clear:function(){
@@ -257,8 +265,17 @@
             that.query.push(d);
             that.index = that.query.length - 1;
         },
+        factory:function(w,h,rect){
+            var that = this;
+            return [rect.x,rect.y,rect.width,rect.height,(w - rect.width)/2 + that.offset.x,(h - rect.height)/2 + that.offset.y,rect.width,rect.height];
+        },
         export:function(){
             var that = this;
+            var _arr = [];
+            _.each(that.query,function(i){
+                _arr.push(that.factory(WIDTH,HEIGHT,i.rect));
+            });
+            exp.innerHTML = JSON.stringify(_arr);
         },
         animation:function(){
             var that = this;

@@ -144,7 +144,7 @@ body{
     list-style: none;
 }
 #layers li{
-    background:#000;
+    background: rgba(58, 55, 55, 0.64);
     height:50px;
     width:20px;
     float:left;
@@ -157,7 +157,7 @@ body{
 }
 #operate{
     position: absolute;
-    top: 400px;
+    bottom: 30px;
     background: #D3D3D3;
     border-radius: 2px;
     padding:10px 0;
@@ -166,11 +166,18 @@ body{
     height:20px;
 }
 #layers .current{
-    background:#fff;
+    background: #EBEBEB;
     color:#000;
 }
 #status span{
     margin-right:10px;
     width:120px;
     display:inline-block;
+}
+#export{
+    width:300px;
+    height:300px;
+    color:#999;
+    border:none;
+    background:#ebebeb;
 }

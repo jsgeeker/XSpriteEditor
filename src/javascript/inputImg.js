@@ -40,7 +40,8 @@
         fillImg:function(s){
             var that = this;
             that.image = new Image(); 
-            that.image.onload = function(){ 
+            that.image.onload = function(){
+                msg.send('loadImg',that.image);
                 if(that.image.height > MAX_HEIGHT) {
                     that.zoom = MAX_HEIGHT / that.image.height;
                 }else{
