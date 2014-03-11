@@ -221,10 +221,12 @@
         },
         initHelp:function(){
             var that = this;
+            var src = 'docs/simple.png';
             if(that.status ==  1){
                 return;
             }
-            that.fillImg('docs/simple.png');
+            msg.send('updateName',src);
+            that.fillImg(src);
         }
     };
     return Stage;
