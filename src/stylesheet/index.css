@@ -177,3 +177,6 @@ body{
     border:none;
     background:#ebebeb;
 }
+#help{
+    cursor:pointer;
+}
