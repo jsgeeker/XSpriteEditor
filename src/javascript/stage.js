@@ -1,4 +1,4 @@
-;define('inputImg',['util','msg'],function(_,Msg){
+;define('stage',['util','msg'],function(_,Msg){
     var MAX_HEIGHT = 600;
     var PREVENT = 151;
     var msg = new Msg();
@@ -8,14 +8,15 @@
 		this.width = width;
 		this.height = height;
 	}
-    function InputImg(){
+    function Stage(){
         this.playground = document.getElementById('playground');
         this.ctx = this.playground.getContext("2d");
         this.input = document.getElementById('input');
+        this.help = document.getElementById('help');
         this.status = 0;
         this.init();
     };
-    InputImg.prototype = {
+    Stage.prototype = {
         init:function(){
             this.bind();
         },
@@ -76,6 +77,9 @@
             }, false);
             that.input.addEventListener('change', function(e) {
                 that.fillPlayGround(e.target.files[0]);
+            }, false);
+            that.help.addEventListener('click', function(e) {
+                that.initHelp();
             }, false);
         },
         detectMouse:function(x,y){
@@ -214,7 +218,16 @@
             }
             that.ctx.putImageData(back,rect.x,rect.y);
             that.ctx.stroke();
+        },
+        initHelp:function(){
+            var that = this;
+            var src = 'docs/simple.png';
+            if(that.status ==  1){
+                return;
+            }
+            msg.send('updateName',src);
+            that.fillImg(src);
         }
     };
-    return InputImg;
+    return Stage;
 });

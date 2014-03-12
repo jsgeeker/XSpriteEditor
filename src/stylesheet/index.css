@@ -189,3 +189,6 @@ blockquote::before {
     top: 7.4em;
     color: #E0E0E0;
 }
+#help{
+    cursor:pointer;
+}
