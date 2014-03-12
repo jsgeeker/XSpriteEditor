@@ -1,6 +1,6 @@
 ;define('inputImg',['util','msg'],function(_,Msg){
     var MAX_HEIGHT = 600;
-    var PREVENT = 121;
+    var PREVENT = 151;
     var msg = new Msg();
 	function Rect(x, y, width, height) {
 		this.x = x;
@@ -197,7 +197,7 @@
             });
             that.ctx.beginPath();
             that.ctx.rect(rect.x,rect.y,rect.width,rect.height);
-            that.ctx.fillStyle="rgba(50,50,50,0.2)";
+            that.ctx.fillStyle="rgba(100,100,100,0.1)";
             that.ctx.fill();
             var back = that.ctx.createImageData(rect.width, rect.height);
             var arr = back.data;

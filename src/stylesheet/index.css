@@ -173,7 +173,19 @@ body{
 #export{
     width:300px;
     height:200px;
+    margin-top;10px;
     color:#999;
     border:none;
-    background:#ebebeb;
+    background:transparent;
+}
+blockquote::before {
+    font-style: normal;
+    content: '\201C';
+    font-size: 60px;
+    line-height: 60px;
+    font-family: Georgia, Palatino, 'Times New Roman', Times;
+    position: absolute;
+    left: 38px;
+    top: 7.4em;
+    color: #E0E0E0;
 }
