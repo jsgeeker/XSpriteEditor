@@ -1,4 +1,5 @@
-sprite_sheet_editor
+Spritesheet Editor
+
 ===================
 
-sprite_sheet_editor
+Power by xdf
