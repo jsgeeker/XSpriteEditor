@@ -1,6 +1,6 @@
 //aml config
 ;aml.config({
-    path: (!!~location.hostname.indexOf('gitlab') ? 'http://rawgithub.com/xudafeng/XSpriteEditor/master/src/javascript/' : 'src/javascript/')
+    path: (!!~location.hostname.indexOf('demo.taobao.net') ? 'http://rawgithub.com/xudafeng/XSpriteEditor/master/src/javascript/' : 'src/javascript/')
 });
 ;define('init',['stage','preview','timer','status'],function(Stage,PreView,Timer,Status){
     var classQuery = arguments;
