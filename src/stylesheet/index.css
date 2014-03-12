@@ -174,21 +174,40 @@ body{
     width:300px;
     height:200px;
     margin-top;10px;
-    color:#999;
     border:none;
     background:transparent;
+    text-align:left;
+    overflow-x: hidden;
 }
-blockquote::before {
-    font-style: normal;
+blockquote::before,
+blockquote::after{
     content: '\201C';
-    font-size: 60px;
-    line-height: 60px;
+    font-size: 70px;
     font-family: Georgia, Palatino, 'Times New Roman', Times;
     position: absolute;
-    left: 38px;
-    top: 7.4em;
-    color: #E0E0E0;
+    color: rgba(224, 224, 224, 0.8);
+}
+blockquote::before{
+    left: 8px;
+    top: 440px;
+}
+blockquote::after {
+    right: 8px;
+    bottom: 30px;
+    transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
 }
 #help{
     cursor:pointer;
+}
+blockquote::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255);
+}
+blockquote::-webkit-scrollbar-thumb {
+    background-color: #000000;
+}
+blockquote::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
 }
