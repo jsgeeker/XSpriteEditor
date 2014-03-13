@@ -1,4 +1,4 @@
-;define('stage',['util','msg'],function(_,Msg){
+;define('stage',['util','msg','loadImg'],function(_,Msg,LoadImg){
     var MAX_HEIGHT = 600;
     var PREVENT = 151;
     var msg = new Msg();
@@ -40,22 +40,22 @@
         },
         fillImg:function(s){
             var that = this;
-            that.image = new Image(); 
-            that.image.onload = function(){
-                msg.send('loadImg',that.image);
-                if(that.image.height > MAX_HEIGHT) {
-                    that.zoom = MAX_HEIGHT / that.image.height;
-                }else{
-                    that.zoom = 1;
-                }
-                that.playground.style.zoom = that.zoom;
-                that.ctx.clearRect(0, 0, that.ctx.width, that.ctx.height);
-                that.playground.width = that.image.width;
-                that.playground.height = that.image.height;
-                that.ctx.drawImage(that.image, 0, 0, that.image.width, that.image.height);
-                that.status = 1;
+            if(s){
+                that.image = new Image();
+                that.image.src = s;
             }
-            that.image.src = s;
+            msg.send('loadImg',that.image);
+            if(that.image.height > MAX_HEIGHT) {
+                that.zoom = MAX_HEIGHT / that.image.height;
+            }else{
+                that.zoom = 1;
+            }
+            that.playground.style.zoom = that.zoom;
+            that.ctx.clearRect(0, 0, that.ctx.width, that.ctx.height);
+            that.playground.width = that.image.width;
+            that.playground.height = that.image.height;
+            that.ctx.drawImage(that.image, 0, 0, that.image.width, that.image.height);
+            that.status = 1;
         },
         bind:function(){
             var that = this;
@@ -225,8 +225,12 @@
             if(that.status ==  1){
                 return;
             }
-            msg.send('updateName',src);
-            that.fillImg(src);
+            msg.send('updateName','正在加载演示图片…');
+            new LoadImg(src).ready(function(d){
+                msg.send('updateName',src);
+                that.image = d[0];
+                that.fillImg();
+            });
         }
     };
     return Stage;
