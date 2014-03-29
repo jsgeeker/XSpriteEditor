@@ -221,13 +221,13 @@
         },
         initHelp:function(){
             var that = this;
-            var src= 'http://gtms02.alicdn.com/tps/i2/T1LVr2FB8dXXbcCg6t-569-576.png';
+            var src = 'docs/simple.png';
             if(that.status ==  1){
                 return;
             }
             msg.send('updateName','正在加载演示图片…');
             new LoadImg(src).ready(function(d){
-                msg.send('updateName','docs/simple.png');
+                msg.send('updateName',src);
                 that.image = d[0];
                 that.fillImg();
             });
