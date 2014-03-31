@@ -2,4 +2,4 @@ Spritesheet Editor
 
 ===================
 
-Power by xdf
+By xdf
