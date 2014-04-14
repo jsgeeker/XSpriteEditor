@@ -1,27 +1,17 @@
-/*
- * grunt
- */
-
-'use strict';
-
 module.exports = function(grunt) {
-
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    // Configuration to be run (and then tested).
-    nodewebkit: {
-      options: {
-        mac: true,
-        build_dir: './'
-      },
-      src: './app'
-    },
-
-  });
-
-  grunt.loadNpmTasks('grunt-node-webkit-builder');
-
-  // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
-
+    grunt.initConfig({
+        nodewebkit: {
+            options: {
+                build_dir: './build',
+                credits: './files/credits.html',
+                mac: true,
+                win: true,
+                linux32: true,
+                linux64: true,
+            },
+            src: './files/**/*'
+        }
+    });
+    grunt.loadNpmTasks('grunt-node-webkit-builder');
+    grunt.registerTask('default', ['nodewebkit']);
 };
