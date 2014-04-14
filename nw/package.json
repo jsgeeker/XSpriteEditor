@@ -1,0 +1,12 @@
+{
+  "name": "XSpriteEditor",
+  "main": "index.html",
+  "window": {
+    "show": false,
+    "position": "center",
+    "width": 1200,
+    "height": 800,
+    "toolbar":false,
+    "frame":false
+  }
+}
