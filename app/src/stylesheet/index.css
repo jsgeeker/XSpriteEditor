@@ -215,4 +215,5 @@ blockquote::-webkit-scrollbar {
 }
 #close{
     float:right!important;
+    cursor:pointer;
 }
