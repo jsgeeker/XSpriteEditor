@@ -1,5 +1,7 @@
 Spritesheet Editor
 
-===================
+==================
 
-By xdf
+```bash
+$ make server
+```
